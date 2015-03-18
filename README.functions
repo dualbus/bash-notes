@@ -1,0 +1,72 @@
+USE_VAR(X): in shell.h
+    Force gcc to not clobber X on a longjmp().
+
+FASTCOPY(s, d, n): in general.h
+    Equivalent to: memmove(s, d, n)
+
+    Copies `n' bytes from the `d' pointer to a temporary buffer, and then, it
+    copies such bytes from the temporary buffer to `s'. This is to avoid
+    problems when `s' and `d' point to overlapping memory sections.
+
+legal_number()
+sh_invalidnum()
+legal_identifier()
+valid_array_reference()
+
+uconvert(s, ip, up): in lib/sh/uconvert.c
+
+    Takes the string representation of a floating point number
+    ("int[.[micro]]"), and converts that to the integer (ip) and millionths
+    (up) parts.
+
+---
+# unwind_prot.c
+
+    > unwind-protect is a special operator in CommonLisp that allows the
+    > programmer to ensure that cleanup code is invoked whenever a block of
+    > code exits, regardless of how the exit occurs.
+    -- http://c2.com/cgi/wiki?UnwindProtect
+
+    This is akin to 'finally' in other languages.
+
+    It works with a linked list of ELT entries, which have the following
+    structure:
+
+    UNWIND_ELT {
+        UNWIND_ELT *next;
+        Function *cleanup;
+        char *v;
+        SAVED_VAR v; (char *variable, int size, char desired_setting)
+    }
+
+    The `v' attribute is also used to store a `tag', which allows functions
+    like unwind_frame_discard() to dequeue elements up-to a certain point in
+    the linked list.
+
+begin_unwind_frame()
+add_unwind_protect()
+run_unwind_frame()
+unwind_protect_int()
+--
+
+setjmp_nosigs()
+savestring(s): in general.h
+    Allocates the required space to store `s', and strcpy's it to the new
+    location in memory.
+
+    (char *)strcpy (xmalloc (1 + strlen (s)), (s))
+
+get_string_value(var_name): in variables.c
+    Wrapper that does:
+      if(find_variable(var_name))
+          -> get_variable_value(var_name)
+      else
+          -> NULL
+
+set_if_not(name, value):
+    Binds `name' to `value', if it isn't already in the globals variable table.
+
+dequote_string()
+stupidly_hack_special_variables()
+zread()
+zreadc()
