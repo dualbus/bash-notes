@@ -70,3 +70,31 @@ dequote_string()
 stupidly_hack_special_variables()
 zread()
 zreadc()
+internal_getopt()
+---
+this_command_name
+builtins/common.c
+builtin_error(format, ...)
+builtin_warning(format, ...)
+builtin_usage()
+make_builtin_argv(list, ip) WORD_LIST, int *ip
+remember_args(list, destructive)
+    Store `list' in $1 ... $9 ...
+get_numeric_arg(list, fatal, count)
+initialize_shell_builtins()
+    qsort of the shell_builtins table
+---
+jump_to_top_level(value): sig.c
+    Call to sh_longjmp
+top_level_cleanup(): sig.c
+    Clean's up parser
+    Removes FIFO list when proc subst is enabled
+    Runs run_unwind_protects()
+sh_longjmp(x, n): include/posixjmp.h
+    Equivalent to siglongjmp(x, n)
+setjmp_nosigs(x): ..
+    sigsetjmp(x, 0)
+setjmp_sigs(x): ..
+    sigsetjmp(x, 1)
+evalstring()
+
