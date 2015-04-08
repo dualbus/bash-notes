@@ -20,6 +20,7 @@ uconvert(s, ip, up): in lib/sh/uconvert.c
     (up) parts.
 
 ---
+#unwind
 # unwind_prot.c
 
     > unwind-protect is a special operator in CommonLisp that allows the
@@ -48,7 +49,7 @@ add_unwind_protect()
 run_unwind_frame()
 unwind_protect_int()
 --
-
+jump_to_top_level()
 setjmp_nosigs()
 savestring(s): in general.h
     Allocates the required space to store `s', and strcpy's it to the new
@@ -70,3 +71,16 @@ dequote_string()
 stupidly_hack_special_variables()
 zread()
 zreadc()
+--
+#parser
+yyparse() is the YACC generated parser
+
+parse_command() from eval.c
+    calls the YACC-generated parser and returns the status of the parse.
+    yyparse leaves the parsed command in the global variable GLOBAL_COMMAND
+
+parse_and_execute(string, file, flags) builtins/evalstring.c
+    parses the command contained in string, 
+
+_evalfile() builtins/evalfile.c
+
